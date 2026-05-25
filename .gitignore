@@ -1,0 +1,13 @@
+# 1. Environment variables (our secrets)
+.env
+srcs/.env
+
+# 2. Secret files directory (if you use it)
+secrets/
+credentials.txt
+db_password.txt
+db_root_password.txt
+
+# 3. Ignore Docker runtime data (just in case)
+*.db
+*.log
