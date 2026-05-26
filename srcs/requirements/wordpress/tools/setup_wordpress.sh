@@ -8,7 +8,7 @@ sleep 5
 cd /var/www/wordpress
 
 # Check if WordPress is already downloaded to avoid overwriting data
-if [ ! -f "wp-sin.php" ] && [ ! -f "index.php" ]; then
+if [ ! -f "-sin.php" ] && [ ! -f "index.php" ]; then
     echo "📥 Downloading WordPress via wp-cli..."
 
     # Download the command-line tool for managing WordPress (wp-cli)
