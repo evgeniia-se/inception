@@ -10,8 +10,10 @@ Secrets & Configuration
 
 Sensitive credentials must not be committed to the repository. Before the first launch, create the .env file manually:
 
+`cp srcs/.env.template srcs/.env`
 `nano srcs/.env`
-copy from README.md
+
+Populate it using the following template — replace all placeholder values with secure ones:
 
 
 # Build & Launch
