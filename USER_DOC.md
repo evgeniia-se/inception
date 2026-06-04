@@ -1,33 +1,45 @@
 # USER DOCUMENTATION
 
-## 🗂️ Provided Services
+### 🗂️ Provided Services
 The infrastructure provisions a secure web publishing environment containing:
 *   **NGINX Web Server**: Serves as the TLS gateway (Port 443).
 *   **WordPress Platform**: Delivers the CMS framework powered by PHP-FPM.
 *   **MariaDB Database**: Manages data models and transaction storage.
 
-## 🚀 Control Commands (Start & Stop)
+
+### 🚀 Control Commands (Start & Stop)
 Run these lifecycle operations from the repository root:
-*   **Start Stack**: `make` (or `docker compose -f srcs/docker-compose.yml up -d`)
-*   **Stop Stack**: `make down` (or `docker compose -f srcs/docker-compose.yml down`)
+*   Start Stack: `make` (or `docker compose -f srcs/docker-compose.yml up -d`)
+*   Stop Stack: `make down` (or `docker compose -f srcs/docker-compose.yml down`)
 
-## 🌐 Web & Administration Access
-*   **Public Site**: Access via secure browser address: `https://esergeev.42.fr`
-*   **Administration Dashboard**: Access via management console: `https://esergeev.42.fr/wp-admin`
 
-## 🔐 Credentials Management
-All operational credentials are isolated inside the local configuration template:
-*   **Location**: `srcs/.env` (This file is strictly excluded from Git tracking for security).
-*   **Target Variables**: Contains keys for database access (`MYSQL_PASSWORD`), WordPress administrative access (`WP_ADMIN_PASSWORD`), and regular user setups.
+### 🌐 Web & Administration Access
+*   Public Site: Access via secure browser address: `https://esergeev.42.fr`
+*   Administration Dashboard: Access via management console: `https://esergeev.42.fr/wp-admin`
 
-## 🩺 System Health and Integrity Checks (No Background Hacks)
-To guarantee that no bad practices (like forbidden loops or detached processes) are active, use these verification commands:
 
-### 1. Process Master Status Verification (PID 1 Check)
-Every service must run its binary natively as the master process (**PID 1**). Background execution strings like `sleep infinity` or `tail -f /dev/null` are absent.
-```bash
-# Verify WordPress is executing PHP-FPM natively as PID 1
-docker exec -it wordpress ps ax
+### 🔐 Credentials
+All credentials are stored in `srcs/.env` — this file is git-ignored and never committed to the repository.
+Variable:
+WP_ADMIN_USER / WP_ADMIN_PASSWORD	WordPress admin login
+WP_USER / WP_USER_PASSWORD	 		WordPress author login
+MYSQL_USER / MYSQL_PASSWORD			Database user access
+MYSQL_ROOT_PASSWORD					Database root access
 
-# Verify NGINX is handling traffic natively as PID 1
-docker exec -it nginx cat /proc/1/cmdline
+
+### 🩺 System Health and Integrity Checks
+Are the containers running?
+
+`docker ps`   All three containers (nginx, wordpress, mariadb) should appear as "Up"
+
+
+# Check container logs
+
+`docker logs nginx`       NGINX output
+`docker logs wordpress`   WordPress / PHP-FPM output
+`docker logs mariadb`     MariaDB output
+
+# PID 1 verification
+
+`docker exec -it wordpress ps ax`          # PHP-FPM must be PID 1
+`docker exec -it nginx cat /proc/1/cmdline`  # NGINX must be PID 1

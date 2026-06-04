@@ -1,36 +1,55 @@
 # DEVELOPER DOCUMENTATION
 
-## Prerequisites
+### Prerequisites
 
 Ensure the following tools are installed on Debian-based GNU/Linux environment:
 
 `sudo apt-get update && sudo apt-get install -y docker-ce docker-compose-plugin make`
 
-Secrets & Configuration
 
-Sensitive credentials must not be committed to the repository. Before the first launch, create the .env file manually:
+### Secrets & Configuration
+
+Sensitive credentials must not be committed to the repository. Before the first launch, create the .env file from the provided template:
 
 `cp srcs/.env.template srcs/.env`
-`nano srcs/.env`
+`nano srcs/.env`   # replace all placeholder values with secure ones
 
-Populate it using the following template — replace all placeholder values with secure ones:
+The template defines the following variables:
 
+── Global ──────────────────────────────────────
+DOMAIN_NAME=esergeev.42.fr
+
+── MariaDB ─────────────────────────────────────
+MYSQL_DATABASE=inception_db
+MYSQL_USER=wp_user
+MYSQL_PASSWORD=your_secure_user_pass
+MYSQL_ROOT_PASSWORD=your_secure_root_pass
+
+── WordPress Admin ──────────────────────────────
+WP_ADMIN_USER=wp_boss
+WP_ADMIN_PASSWORD=your_secure_boss_pass
+WP_ADMIN_EMAIL=esergeev@student.42.fr
+
+── WordPress Author ─────────────────────────────
+WP_USER=wp_author
+WP_USER_PASSWORD=your_secure_wp_user_pass
+WP_USER_EMAIL=author@example.com
 
 # Build & Launch
 
 All commands are run from the project root.
 
-`make`        # Build images and start all containers
-`make down`   # Stop and remove containers
-`make clean`  # Stop containers and remove volumes
-`make re`     # Full rebuild from scratch
+`make`        Build images and start all containers
+`make down`   Stop and remove containers
+`make clean`  Stop containers and remove volumes
+`make re`     Full rebuild from scratch
 
 # Container Management
 General Status
 
-`docker ps`                  # List active containers and exposed ports
-`docker logs esergeev`         # Stream output from a container's init script
-`docker volume ls`           # List all volumes
+`docker ps`                  List active containers and exposed ports
+`docker logs esergeev`       Stream output from a container's init script
+`docker volume ls`           List all volumes
 
 PID 1 Compliance
 
@@ -42,12 +61,12 @@ Every service must run its binary natively as PID 1. Patterns like sleep infinit
 # Verify NGINX binary is PID 1
 `docker exec -it nginx cat /proc/1/cmdline`
 
-# Network Isolation
+### Network Isolation
 
 Services must communicate via the isolated bridge network — host networking is forbidden.
 
-`docker network ls`                          # List active networks
-`docker network inspect inception_network`   # Inspect inter-container links
+`docker network ls`                          List active networks
+`docker network inspect inception_network`   Inspect inter-container links
 
 # Data Persistence
 
@@ -60,4 +79,5 @@ MariaDB database	/home/esergeev/data/mariadb
 
 `docker volume inspect srcs_wordpress_data`
 `docker volume inspect srcs_mariadb_data`
+
 # The "Mountpoint" field must point to /home/esergeev/data/
