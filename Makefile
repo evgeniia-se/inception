@@ -22,8 +22,8 @@ clean:
 
 fclean: clean
 	docker compose -f $(COMPOSE_FILE) down --rmi all --volumes
-	@rm -rf $(DATA_DIR)/wordpress/*
-	@rm -rf $(DATA_DIR)/mariadb/*
+	@sudo rm -rf $(DATA_DIR)/wordpress/*
+	@sudo rm -rf $(DATA_DIR)/mariadb/*
 	@sudo rm -rf $(DATA_DIR) 2>/dev/null || true
 
 re: fclean all
