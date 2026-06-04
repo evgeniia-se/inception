@@ -63,7 +63,7 @@ services:
     networks:
       - inception_network
     ports:
-      - "8443:443"
+      - "443:443"
     volumes:
       - wordpress_data:/var/www/wordpress
     env_file:
