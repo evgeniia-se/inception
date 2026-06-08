@@ -81,3 +81,17 @@ MariaDB database	/home/esergeev/data/mariadb
 `docker volume inspect srcs_mariadb_data`
 
 # The "Mountpoint" field must point to /home/esergeev/data/
+
+
+# Change port and check resultat
+
+1. nginx: 8443:443 in .yml
+`docker compose ps` -> https://esergeev.42.fr:8443
+
+2. wordpress(www.conf): listen = 9042
+	nginx.conf fastcgi_pass wordpress:9042
+`docker exec -it wordpress sh -c "grep -R 'listen =' /etc/php"`
+
+3. mariadb(50-server.cnf): port = 3333
+	setup_wordpress.sh: --dbhost=mariadb:3333
+`docker exec -it mariadb mysql -u wp_user -p -e "SHOW VARIABLES LIKE 'port';"`
