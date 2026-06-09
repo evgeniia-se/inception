@@ -10,7 +10,7 @@ The infrastructure provisions a secure web publishing environment containing:
 ### 🚀 Control Commands (Start & Stop)
 Run these lifecycle operations from the repository root:
 *   Start Stack: `make` (or `docker compose -f srcs/docker-compose.yml up -d`)
-*   Stop Stack: `make down` (or `docker compose -f srcs/docker-compose.yml down`)
+*   Stop Stack: `docker compose -f srcs/docker-compose.yml down`
 
 
 ### 🌐 Web & Administration Access
