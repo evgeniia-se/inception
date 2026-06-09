@@ -123,5 +123,4 @@ grep -rn "ENTRYPOINT" srcs/
 grep -rn "sleep infinity\|tail -f /dev/null\|tail -f /dev/random\|while true\|sleep [0-9]" srcs/
 
 # Export image comme archive
-
 docker save -o my_nginx_image.tar nginx
