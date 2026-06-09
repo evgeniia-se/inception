@@ -28,7 +28,7 @@ services:
     build:
       context: ./requirements/mariadb
       dockerfile: Dockerfile
-    image: mariadb
+    image: mariadb:42
     restart: always
     networks:
       - inception_network
@@ -42,7 +42,7 @@ services:
     build:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
-    image: wordpress
+    image: wordpress:42
     restart: always
     networks:
       - inception_network
@@ -58,7 +58,7 @@ services:
     build:
       context: ./requirements/nginx
       dockerfile: Dockerfile
-    image: nginx
+    image: nginx:42
     restart: always
     networks:
       - inception_network
