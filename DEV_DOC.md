@@ -87,6 +87,9 @@ MariaDB database	/home/esergeev/data/mariadb
 
 1. nginx: 8443:443 in .yml
 `docker compose ps` -> https://esergeev.42.fr:8443
+for 8443:42
+'nginx.conf' 		listen 42 ssl; etc.
+'.env'				WP_URL=https://esergeev.42.fr:4242
 
 2. wordpress(www.conf): listen = 9042
 	nginx.conf fastcgi_pass wordpress:9042

@@ -124,3 +124,10 @@ grep -rn "sleep infinity\|tail -f /dev/null\|tail -f /dev/random\|while true\|sl
 
 # Export image comme archive
 docker save -o my_nginx_image.tar nginx
+
+# Login DataBase and check is not empty
+docker exec -it mariadb mysql -u root -p
+"root pass"
+SHOW DATABASES;
+USE inception_db;
+SHOW TABLES;
