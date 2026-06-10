@@ -66,8 +66,7 @@ Sensitive credentials must not be committed to the repository. Before the first 
 ### Execution
 
 `make`        # Build images and start all containers
-`make down`   # Stop and remove containers
-`make clean`  # Stop containers and remove volumes
+`make fclean`  # Stop and remove containers, volumes
 `make re`     # Full rebuild from scratch
 
 Once running, access the site at https://esergeev.42.fr.

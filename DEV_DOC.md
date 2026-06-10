@@ -40,8 +40,7 @@ WP_USER_EMAIL=author@example.com
 All commands are run from the project root.
 
 `make`        Build images and start all containers
-`make down`   Stop and remove containers
-`make clean`  Stop containers and remove volumes
+`make fclean`  # Stop and remove containers, volumes
 `make re`     Full rebuild from scratch
 
 # Container Management
